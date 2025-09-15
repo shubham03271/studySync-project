@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #351a53, #6f81a1);
+      font-family: Arial, sans-serif;
+    }
+
+    .login-container {
+      background: #bcb8b8;
+      padding: 30px;
+      width: 350px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    /* Cursor */
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #333;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+     .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    } 
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #2575fc;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-container button:hover {
+      background: #6a11cb;
+    }
+
+    .login-container p {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .login-container a {
+      color: #2575fc;
+      text-decoration: none;
+    }
+    .login-container input{
+        padding-right: 0;
+        margin-right: 50px;
+         width: 100%;
+        box-sizing: border-box;
+        margin: 10px 0;
+    }
+    .login-container input:focus {
+     border-color: #2575fc;
+     box-shadow: 0 0 5px rgba(37,117,252,0.5);
+}
+
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2><span id="typeText"></span>
+   <span class="cursor"></span>
+   </h2>
+    <!-- The action attribute decides the next page -->
+    <form action="index1.html" method="get">
+      <input type="text" placeholder="Username" required >
+      <input type="password" placeholder="Password" required >
+      <button type="submit">Login</button>
+      <p>Don't have an account? <a href="#">Sign Up</a></p>
+    </form>
+  </div>
+  <script>
+const words = ["Welcome To StudySync !", "Login to Continue."];
+const el = document.getElementById("typeText");
+const cursor = document.querySelector(".cursor");
+
+let i = 0, j = 0, isDeleting = false;
+
+function type() {
+  let current = words[i];
+  if (!isDeleting) {
+    el.textContent = current.slice(0, ++j);
+    if (j === current.length) {
+      isDeleting = true;
+      setTimeout(type, 1000); // pause before deleting
+      return;
+    }
+  } else {
+    el.textContent = current.slice(0, --j);
+    if (j === 0) {
+      isDeleting = false;
+      i = (i + 1) % words.length;
+    }
+  }
+  setTimeout(type, isDeleting ? 50 : 100);
+}
+type();
+</script>
+
+</body>
+</html>
